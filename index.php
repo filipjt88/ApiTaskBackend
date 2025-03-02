@@ -11,6 +11,18 @@
 
 <body>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3 mt-5">
+            <h1>Task</h1>
+            <input type="text" id="taskInput" class="form-control" placeholder="Add new task..."><br>
+            <button onclick="addTask()" class="btn btn-sm btn btn-success">Add task</button>
+        </div>
+        <ul id="taskList" class="list-group list-group-flush">
+</ul>
+    </div>
+</div>
+
 
 <script src="js/main.js"></script>
 </body>
