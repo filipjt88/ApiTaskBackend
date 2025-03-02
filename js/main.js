@@ -14,7 +14,7 @@ function fetchTasks() {
                    <div class="row">
                    <div class="col-md-6 offset-3 mt-5">
                     <li class="list-group-item">${task.title}</li>
-                    <div><br>
+                    <div><br>   
                         <button class=" btn-sm btn btn-warning edit-btn" onclick="editTask(${task.id}, '${task.title}')">Delete</button>
                     </div>
                    </div>
@@ -22,6 +22,23 @@ function fetchTasks() {
                    </div>
                 `;
                 taskList.appendChild(li);
-            })
+            });
+        });
+}
+
+// Add new task
+function addTask() {
+    const taskInput = document.getElementById("taskInput").value.trim();
+    if (taskInput === "") return alert("Enter the task!");
+
+    fetch("tasks.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: taskInput })
+    })
+        .then(response => response.json())
+        .then(() => {
+            document.getElementById("taskInput").value = "";
+            fetchTasks();
         })
 }
