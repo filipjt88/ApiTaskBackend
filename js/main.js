@@ -1,0 +1,27 @@
+document.addEventListener("DOMContentLoaded", fetchTasks);
+
+function fetchTasks() {
+    fetch("tasks.php")
+        .then(response => response.json())
+        .then(data => {
+            const taskList = document.getElementById("taskList");
+            taskList.innerHTML = "";
+
+            data.forEach(task => {
+                const li = document.createElement("li");
+                li.innerHTML = `
+                   <div class="container">
+                   <div class="row">
+                   <div class="col-md-6 offset-3 mt-5">
+                    <li class="list-group-item">${task.title}</li>
+                    <div><br>
+                        <button class=" btn-sm btn btn-warning edit-btn" onclick="editTask(${task.id}, '${task.title}')">Delete</button>
+                    </div>
+                   </div>
+                   </div>
+                   </div>
+                `;
+                taskList.appendChild(li);
+            })
+        })
+}
