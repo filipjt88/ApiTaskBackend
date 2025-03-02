@@ -29,4 +29,38 @@ echo json_encode(["message" => "Task added successfully"]);
 exit;
 }
 
+// Deleted task
+if($_SERVER["REQUEST_METHOD"] === "DELETE") {
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    if(!isset($data["id"])) {
+        echo json_encode(["error" => "Task ID is required!"]);
+        exit;
+    }
+    $stmt = $pdo->prepare("DELETE FROM tasks WHERE id = :id");
+    $stmt->execute(["id" => $data["id"]]);
+    echo json_encode(["message" => "Task deleted successfully"]);
+    exit;
+}
+
+// Edited task
+if($_SERVER("REQUEST_METHOD") === "PUT") {
+    $data = json_decode(file_get_contents("php://input"), true);
+    
+    if(!isset($data["id"]) || !isset($data["title"]) || !isset($data["completed"])) {
+        echo json_encode(["error" => "ID, title, and completed status are required!"]);
+        exit;
+    }
+    $stmt = $pdo->prepare("UPDATE tasks SET title = :title, completed = :completed WHERE id = :id");
+    $stmt->execute([
+        "id" => $data["id"],
+        "title" => $data["title"],
+        "completed" => $data["completed"]
+    ]);
+    echo json_encode(["message" => "Task updated successfully"]);
+    exit;
+}
+
+
+
 ?>
