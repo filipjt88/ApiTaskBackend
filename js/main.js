@@ -14,8 +14,8 @@ function fetchTasks() {
                    <div class="row">
                    <div class="col-md-6 offset-3 mt-5">
                     <li class="list-group-item">${task.title}</li>
-                    <div> 
-                    <button class="btn-sm btn btn-danger edit-btn" onclick="editTask(${task.id}, '${task.title}')">Edit</button>  
+                    <div>    
+                    <button class="btn-sm btn btn-warning edit-btn" onclick="editTask(${task.id}, '${task.title}')">Edit</button>  
                      <button class=" btn-sm btn btn-danger delete-btn" onclick="deleteTask(${task.id}, '${task.title}')">Delete</button>
                     </div>
                    </div>
@@ -46,7 +46,7 @@ function addTask() {
 
 // Delete task
 function deleteTask(id) {
-    if (!confirm("Da li ste sigurni da zelite da obrisete?")) return;
+    if (!confirm("Are you sure you want to delete?")) return;
 
     fetch("tasks.php", {
         method: "DELETE",
@@ -59,7 +59,7 @@ function deleteTask(id) {
 
 // Edit task
 function editTask(id, oldTitle) {
-    const newTitle = prompt("Da li zelite da izvrsite izmene?", oldTitle);
+    const newTitle = prompt("Do you want to make changes?", oldTitle);
     if (!newTitle) return;
     fetch("tasks.php", {
         method: "PUT",
