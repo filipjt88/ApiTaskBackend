@@ -55,3 +55,16 @@ function deleteTask(id) {
         .then(response => response.json())
         .then(() => fetchTasks());
 }
+
+// Edit task
+function editTask(id, oldTitle) {
+    const newTitle = prompt("Da li zelite da izvrsite izmene?", oldTitle);
+    if (!newTitle) return;
+    fetch("tasks.php", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: id, title: newTitle, completed: false })
+    })
+        .then(response => response.json())
+        .then(() => fetchTasks());
+}
