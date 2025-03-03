@@ -15,7 +15,7 @@ function fetchTasks() {
                    <div class="col-md-6 offset-3 mt-5">
                     <li class="list-group-item">${task.title}</li>
                     <div><br>   
-                        <button class=" btn-sm btn btn-warning edit-btn" onclick="editTask(${task.id}, '${task.title}')">Delete</button>
+                        <button class=" btn-sm btn btn-danger delete-btn" onclick="deleteTask(${task.id}, '${task.title}')">Delete</button>
                     </div>
                    </div>
                    </div>
@@ -41,4 +41,17 @@ function addTask() {
             document.getElementById("taskInput").value = "";
             fetchTasks();
         })
+}
+
+// Delete task
+function deleteTask(id) {
+    if (!confirm("Da li ste sigurni da zelite da obrisete?")) return;
+
+    fetch("tasks.php", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: id })
+    })
+        .then(response => response.json())
+        .then(() => fetchTasks());
 }
