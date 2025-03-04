@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", fetchTasks);
-
 function fetchTasks() {
     fetch("tasks.php")
         .then(response => response.json())
@@ -14,7 +13,7 @@ function fetchTasks() {
                    <div class="row">
                    <div class="col-md-6 offset-3 mt-5">
                     <li class="list-group-item">${task.title}</li>
-                    <div>    
+                    <div></br>
                     <button class="btn-sm btn btn-warning edit-btn" onclick="editTask(${task.id}, '${task.title}')">Edit</button>  
                      <button class=" btn-sm btn btn-danger delete-btn" onclick="deleteTask(${task.id}, '${task.title}')">Delete</button>
                     </div>
@@ -39,13 +38,10 @@ function showMessage(text, type = "success") {
     }, 3000);
 }
 
-
-
 // Add new task
 function addTask() {
     const taskInput = document.getElementById("taskInput").value.trim();
     if (taskInput === "") return showMessage("Enter the task!", "error");
-
     fetch("tasks.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -8,17 +8,6 @@ body {
     background-color: #eee;
 }
 
-#message {
-    display: none;
-    padding: 10px;
-    margin: 10px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    font-weight: bolder;
-}
-
 .success {
     background-color: #d4edda;
     color: #155724;
@@ -31,6 +20,17 @@ body {
     border: 1px solid #f5c6cb;
 }
 
+ul {
+    list-style: none;
+    text-decoration: none;
+}
+
 .hidden {
     display: none;
+}
+
+.list-group-item {
+    border: 1px solid #000;
+    background-color: transparent;
+    outline: 2px solid blue;
 }
