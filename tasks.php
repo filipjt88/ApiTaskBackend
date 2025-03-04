@@ -44,7 +44,7 @@ if($_SERVER["REQUEST_METHOD"] === "DELETE") {
 }
 
 // Edited task
-if($_SERVER("REQUEST_METHOD") === "PUT") {
+if($_SERVER["REQUEST_METHOD"] === "PUT") {
     $data = json_decode(file_get_contents("php://input"), true);
     
     if(!isset($data["id"]) || !isset($data["title"]) || !isset($data["completed"])) {

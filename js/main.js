@@ -27,10 +27,24 @@ function fetchTasks() {
         });
 }
 
+
+// Show message
+function showMessage(text, type = "success") {
+    const messageBox = document.getElementById("message");
+    messageBox.textContent = text;
+    messageBox.className = type;
+    messageBox.style.display = "block";
+    setTimeout(() => {
+        messageBox.style.display = "none";
+    }, 3000);
+}
+
+
+
 // Add new task
 function addTask() {
     const taskInput = document.getElementById("taskInput").value.trim();
-    if (taskInput === "") return alert("Enter the task!");
+    if (taskInput === "") return showMessage("Enter the task!", "error");
 
     fetch("tasks.php", {
         method: "POST",
@@ -41,6 +55,7 @@ function addTask() {
         .then(() => {
             document.getElementById("taskInput").value = "";
             fetchTasks();
+            showMessage("Task is added")
         })
 }
 
@@ -55,6 +70,7 @@ function deleteTask(id) {
     })
         .then(response => response.json())
         .then(() => fetchTasks());
+    showMessage("Task is deleted!")
 }
 
 // Edit task
@@ -68,4 +84,5 @@ function editTask(id, oldTitle) {
     })
         .then(response => response.json())
         .then(() => fetchTasks());
+    showMessage("Task is updated!")
 }
